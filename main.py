@@ -4,7 +4,7 @@ from telebot import types
 
 from settings import TELEGRAM_TOKEN
 
-conversion = CurrencyConverter
+conversion = CurrencyConverter()
 
 converter_bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
@@ -21,7 +21,7 @@ def start(message):
 
 
 def conversion_amount(message):
-    """ Функция для конвертации валют """
+    """ Проверка корректного ввода и интерфейс """
     global amount
     try:
         amount = int(message.text.strip())
@@ -43,6 +43,18 @@ def conversion_amount(message):
         info_message_3 = "Некорректный ввод, сумма должна быть больше ноля!"
         converter_bot.send_message(message.chat.id, info_message_3)
         converter_bot.register_next_step_handler(message, conversion_amount)
+
+
+@converter_bot.callback_query_handler(func=lambda call: True)
+def callback(call):
+    """ Функция для конвертации валют """
+    values = call.data.upper().split("/")
+    result = conversion.convert(amount, values[0], values[1])
+    info_message_3 = (f"В настоящее время курс пары {values[0]} к {values[1]},\n"
+                      f"{amount} {values[0]} = {round(result, 2)} {values[1]}\n"
+                      f"Введите следующую сумму для конвертации")
+    converter_bot.send_message(call.message.chat.id, info_message_3)
+    converter_bot.register_next_step_handler(call.message, conversion_amount)
 
 
 converter_bot.polling(none_stop=True)
