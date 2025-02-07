@@ -113,6 +113,17 @@ files = [
 ]
 
 [[package]]
+name = "currencyconverter"
+version = "0.18.2"
+description = "A currency converter using the European Central Bank data."
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "CurrencyConverter-0.18.2-py3-none-any.whl", hash = "sha256:0a417d6ca3ffde2c562c288ac1bbf052b3a862c7c856b7be31615057dd3b4684"},
+    {file = "currencyconverter-0.18.2.tar.gz", hash = "sha256:8cbe2e152174911a3a23777098a94249e79e543daf08a467e788a0184fba4d34"},
+]
+
+[[package]]
 name = "idna"
 version = "3.10"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -206,4 +217,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "95e2f4b60ce0529616b9ebb50eb598bdc47b885e981e083ca4fdad7ba74180a7"
+content-hash = "903de953441ddeacad25768a16eda4f4eb656c0d9f2e25d2540f76cacaed01f5"
